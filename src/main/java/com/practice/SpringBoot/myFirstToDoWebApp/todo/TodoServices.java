@@ -47,7 +47,9 @@ public class TodoServices {
     }
 
     public void  updateTodo( Todo todo){
+        // first delete
         deleteById(todo.getId());
+        // then add new todo
         todos.add(todo);
 
     }
