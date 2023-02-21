@@ -3,7 +3,8 @@
         Login Page
     </title>
     <body>
-        Welcome to the Login Page - ${name}
+<div class="container">
+      <h1>Welcome to the Login Page - ${name}</h1>
         <pre>${errorMessage}</pre>
 <form method="post">
     Name: <input type="text" name="name">
@@ -11,6 +12,7 @@
         <input type="submit">
 
 </form>
+</div>
 </body>
 </head>
 

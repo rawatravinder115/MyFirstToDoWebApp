@@ -11,11 +11,14 @@
 --%>
 <%--    // css file link should be placed in the starting of head--%>
     <link href="webjars/bootstrap/5.1.3/css/bootstrap.min.css"
-            rel="stylesheet"  > /*show that its csc file*/
+            rel="stylesheet"  >
+<%--        /*show that its csc file*/--%>
     <title>List todos pages</title>
 </head>
-    <body>
-    <div>
+<body>
+<%-- recommendation for a bootstrap that all the body content should be within
+        div tag of class container --%>
+    <div class="container">
         <h1>Your Todos</h1>
         <table class="table">
             <thead>
@@ -24,6 +27,8 @@
                 <th>Description</th>
                 <th>Target Date</th>
                 <th>Is Done?</th>
+                <th></th>>
+                <th></th>>
             </tr>
             </thead>
             <tbody>
@@ -33,10 +38,14 @@
                     <td>${todo.description}</td>
                     <td>${todo.targetDate}</td>
                     <td>${todo.done}</td>
+                    <td><a href="delete-todo?id=${todo.id}" class="btn btn-warning">DELETE</a></td>
+                    <td><a href="update-todo?id=${todo.id}" class="btn btn-success">UPDATE</a></td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
+
+        <a href="add-todo" class="btn btn-success">Add Todo</a>
 
     </div>
 
