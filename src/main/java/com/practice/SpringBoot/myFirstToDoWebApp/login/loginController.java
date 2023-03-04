@@ -20,13 +20,13 @@ public class loginController {
     private AuthenticationService authenticationService;
 
 //    http://localhost:8081/login?name=ravi
-//    @RequestMapping("login")
-//    public String gotoLoginPage(@RequestParam String name, ModelMap model){
-//        model.put("name",name);
-//        logger.debug("Request Param is {} :",name);
-//        System.out.println("Request param is :"+ name);
-//        return "login";
-//    }
+    @RequestMapping("login")
+    public String gotoLoginPage(@RequestParam String name, ModelMap model){
+        model.put("name",name);
+        logger.debug("Request Param is {} :",name);
+        System.out.println("Request param is :"+ name);
+        return "login";
+    }
 
     @RequestMapping(value = "login",method = RequestMethod.GET)
     public String gotoLoginPage(){
@@ -50,5 +50,7 @@ public class loginController {
         model.put("errorMessage","Invalid Credentials ! please login again");
         return "login";
     }
+
+
 
 }
