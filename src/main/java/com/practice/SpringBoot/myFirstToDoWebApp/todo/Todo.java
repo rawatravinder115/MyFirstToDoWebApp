@@ -1,6 +1,5 @@
 package com.practice.SpringBoot.myFirstToDoWebApp.todo;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -13,7 +12,6 @@ public class Todo {
     @Id
     @GeneratedValue
     private int id;
-    @Column(name="name")
     private String username;
 
     @Size(min = 10,message = "Enter Atleast 10 Character")
