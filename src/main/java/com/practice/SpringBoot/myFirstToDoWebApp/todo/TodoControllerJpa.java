@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,18 +15,18 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import java.time.LocalDate;
 import java.util.List;
 
-//@Controller
+@Controller
 @SessionAttributes("name")
-public class TodoController {
+public class TodoControllerJpa {
 
     @Autowired
-    private TodoServices todoServices;
+    private TodoRepository todoRepository;
 
     // list-todos
     @RequestMapping(value = "list-todos")
     public String listAllTodos(ModelMap model){
         String username = getLoggedInUsername(model);
-        List<Todo> todos = todoServices.findByUsername(username);
+        List<Todo> todos = todoRepository.findByUsername(username);
         model.addAttribute("todos",todos);
         return "listTodos";
     }
@@ -46,20 +47,24 @@ public class TodoController {
            return "todo";
         }
         String username = getLoggedInUsername(model);
-        todoServices.addTodo(username,todo.getDescription(), todo.getTargetDate(),false);
+        todo.setUsername(username);
+        todoRepository.save(todo);
+//        todoServices.addTodo(username,todo.getDescription(),
+//                todo.getTargetDate(),todo.isDone());
         return "redirect:list-todos";
     }
 
     @RequestMapping(value = "delete-todo")
     public String deleteTodo(@RequestParam int id){
         // delete todo
-        todoServices.deleteById(id);
+        todoRepository.deleteById(id);
+//        todoServices.deleteById(id);
         return "redirect:list-todos";
     }
 
     @RequestMapping(value = "update-todo",method = RequestMethod.GET)
     public String showUpdateTodoPage(@RequestParam int id,ModelMap model){
-        Todo  todo = todoServices.findById(id);
+        Todo  todo = todoRepository.findById(id).get();
         model.addAttribute("todo",todo);
         return "todo";
     }
@@ -71,7 +76,8 @@ public class TodoController {
         }
         String username = getLoggedInUsername(model);
         todo.setUsername(username);
-        todoServices.updateTodo(todo);
+        todoRepository.save(todo);
+//        todoServices.updateTodo(todo);
         return "redirect:list-todos";
     }
 

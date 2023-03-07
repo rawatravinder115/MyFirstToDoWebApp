@@ -52,8 +52,13 @@ public class SpringSecurityConfiguration {
 
     //All URLs are protected
     //A login form is shown for unauthorized requests
-    //CSRF disable
-    //Frames
+    //to access the h2 console CSRF should disable
+    //h2 also use something called Frames but spring security by default doesn't
+    // allow frames
+
+//    filter chain which is capable of being matched against as httpSevletRequest
+//    we can now re configuring it, by default it provides 2 features now we want to
+//    add more features to it which is csrf and frames disable.
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
